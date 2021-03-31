@@ -1,4 +1,5 @@
 using AB.Domain.ArticleCategory;
+using AB.Infrastructure.EfCore.Configurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace AB.Infrastructure.EfCore
@@ -13,8 +14,8 @@ namespace AB.Infrastructure.EfCore
         //Model Creation
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            var configurationAssembly=typeof(ArticleCategory).Assembly;
-            modelBuilder.ApplyConfigurationsFromAssembly(configurationAssembly);
+            
+            modelBuilder.ApplyConfiguration(new ArticleCategoryConfiguration());
             base.OnModelCreating(modelBuilder);
         }
 
