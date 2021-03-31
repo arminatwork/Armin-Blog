@@ -12,8 +12,14 @@ namespace AB.Infrastructure.EfCore.Configurations
             builder.ToTable("ArticleCategories");
 
             builder.HasKey(key => key.Id);
-            builder.Property(prop => prop.Title);
-            builder.Property(prop => prop.CreationDate);
+
+            builder.Property(prop => prop.Title)
+                .HasMaxLength(500)
+                .IsRequired();
+
+            builder.Property(prop => prop.CreationDate)
+                .IsRequired();
+
             builder.Property(prop => prop.IsDeleted);
         }
     }
