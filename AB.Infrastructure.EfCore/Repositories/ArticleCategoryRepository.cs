@@ -17,5 +17,22 @@ namespace AB.Infrastructure.EfCore.Repositories
         {
             return _context.ArticleCategories.ToList();
         }
+
+        public ArticleCategory Get(long id)
+        {
+            return _context.ArticleCategories.FirstOrDefault(first => first.Id == id);
+        }
+
+
+        public void Add(ArticleCategory articleCategory)
+        {
+            _context.ArticleCategories.Add(articleCategory);
+            Save();
+        }
+
+        public void Save()
+        {
+            _context.SaveChanges();
+        }
     }
 }
