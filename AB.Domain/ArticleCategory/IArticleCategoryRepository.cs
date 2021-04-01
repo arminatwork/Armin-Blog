@@ -4,6 +4,8 @@ namespace AB.Domain.ArticleCategory
     public interface IArticleCategoryRepository
     {
         List<ArticleCategory> GetAll();
-        // void Create(ArticleCategory articleCategory);
+        ArticleCategory Get(long id);
+        void Add(ArticleCategory articleCategory);
+        void Save();
     }
 }
