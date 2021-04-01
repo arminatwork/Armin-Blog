@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using AB.Application.Contracts.ArticleCategory;
 using AB.Domain.ArticleCategory;
 
@@ -17,7 +17,9 @@ namespace AB.Application
 
         public List<ArticleCategoryViewModel> List()
         {
-            var articleCategories = _repository.GetAll();
+            //need monitoring
+            var articleCategories = _repository.GetAll().OrderByDescending(order => order.Id);
+
             var result = new List<ArticleCategoryViewModel>();
             foreach (var articleCategory in articleCategories)
             {
@@ -30,8 +32,29 @@ namespace AB.Application
                 });
 
             }
-            
+
             return result;
+        }
+        public void Create(CreateArticleCategory command)
+        {
+            var articleCategory = new ArticleCategory(command.Title);
+            _repository.Add(articleCategory);
+        }
+
+        public void Rename(RenameArticleCategory command)
+        {
+            var articleCategory = _repository.Get(command.Id);
+            articleCategory.Rename(command.Title);
+            _repository.Save();
+        }
+        public RenameArticleCategory Get(long id)
+        {
+            var articleCategory = _repository.Get(id);
+            return new RenameArticleCategory
+            {
+                Id = articleCategory.Id,
+                Title = articleCategory.Title
+            };
         }
     }
 }
