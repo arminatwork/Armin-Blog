@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
-using System;
 
 namespace AB.Application.Contracts.ArticleCategory
 {
     public interface IArticleCategoryApplication
     {
         List<ArticleCategoryViewModel> List();
+        RenameArticleCategory Get(long id);
+        void Create(CreateArticleCategory command);
+        void Rename(RenameArticleCategory command);
     }
 }
