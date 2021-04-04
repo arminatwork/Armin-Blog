@@ -30,6 +30,11 @@ namespace AB.Infrastructure.EfCore.Repositories
             Save();
         }
 
+        public bool Exists(string title)
+        {
+            return _context.ArticleCategories.Any(check => check.Title == title);
+        }
+
         public void Save()
         {
             _context.SaveChanges();

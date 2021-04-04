@@ -6,6 +6,7 @@ namespace AB.Domain.ArticleCategory
         List<ArticleCategory> GetAll();
         ArticleCategory Get(long id);
         void Add(ArticleCategory articleCategory);
+        bool Exists(string title);
         void Save();
     }
 }
