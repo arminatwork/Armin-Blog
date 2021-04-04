@@ -8,5 +8,7 @@ namespace AB.Application.Contracts.ArticleCategory
         RenameArticleCategory Get(long id);
         void Create(CreateArticleCategory command);
         void Rename(RenameArticleCategory command);
+        void Remove(long id);
+        void Activate(long id);
     }
 }
