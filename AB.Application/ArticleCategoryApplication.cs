@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using AB.Application.Contracts.ArticleCategory;
 using AB.Domain.ArticleCategory;
+using AB.Domain.ArticleCategory.Services;
 
 namespace AB.Application
 {
     public class ArticleCategoryApplication : IArticleCategoryApplication
     {
         private readonly IArticleCategoryRepository _repository;
+        private readonly IArticleCategoryValidatorService _service;
 
-        public ArticleCategoryApplication(IArticleCategoryRepository repository)
+        public ArticleCategoryApplication(IArticleCategoryRepository repository, IArticleCategoryValidatorService service)
         {
             _repository = repository;
+            _service = service;
         }
 
         public List<ArticleCategoryViewModel> List()
@@ -37,7 +40,7 @@ namespace AB.Application
         }
         public void Create(CreateArticleCategory command)
         {
-            var articleCategory = new ArticleCategory(command.Title);
+            var articleCategory = new ArticleCategory(command.Title, _service);
             _repository.Add(articleCategory);
         }
 
