@@ -4,11 +4,12 @@ namespace AB.Infrastructure.EfCore.Repositories
 {
     public class ArticleRepository : IArticleRepository
     {
-        private readonly IArticleRepository _repository;
+        private readonly ArminBlogContext _context;
 
-        public ArticleRepository(IArticleRepository repository)
+        public ArticleRepository(ArminBlogContext context)
         {
-            _repository = repository;
+            _context = context;
         }
+
     }
 }
