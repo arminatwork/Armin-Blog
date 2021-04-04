@@ -22,5 +22,15 @@ namespace AB.Domain.ArticleCategory
         {
             Title = title;
         }
+
+        public void Remove(long id)
+        {
+            IsDeleted = true;
+        }
+
+        public void Activate(long id)
+        {
+            IsDeleted = false;
+        }
     }
 }
