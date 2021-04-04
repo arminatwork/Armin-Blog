@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using AB.Domain.ArticleCategory.Services;
 
 namespace AB.Domain.ArticleCategory
@@ -12,6 +13,7 @@ namespace AB.Domain.ArticleCategory
         public bool IsDeleted { get; private set; }
 
         public DateTime CreationDate { get; private set; }
+        public ICollection<Article.Article> Articles { get; private set; }
 
         public ArticleCategory(string title, IArticleCategoryValidatorService service)
         {
@@ -19,6 +21,7 @@ namespace AB.Domain.ArticleCategory
             Title = title;
             IsDeleted = false;
             CreationDate = DateTime.Now;
+            Articles = new List<Article.Article>();
         }
 
         public void Rename(string title)
