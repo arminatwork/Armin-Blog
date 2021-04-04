@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using AB.Application.Contracts.ArticleCategory;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace AB.Presentation.MVC.Areas.Admin.Pages.ArticleCategoryManagement
@@ -17,6 +18,18 @@ namespace AB.Presentation.MVC.Areas.Admin.Pages.ArticleCategoryManagement
         public void OnGet()
         {
             ArticleCategoryViewModels = _articleCategoryApplication.List();
+        }
+
+        public RedirectToPageResult OnPostRemove(long id)
+        {
+            _articleCategoryApplication.Remove(id);
+            return RedirectToPage("./List");
+        }
+
+        public RedirectToPageResult OnPostActivate(long id)
+        {
+            _articleCategoryApplication.Activate(id);
+            return RedirectToPage("./List");
         }
     }
 }
