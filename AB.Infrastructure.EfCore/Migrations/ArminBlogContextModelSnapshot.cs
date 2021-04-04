@@ -19,6 +19,46 @@ namespace AB.Infrastructure.EfCore.Migrations
                 .HasAnnotation("ProductVersion", "5.0.4")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("AB.Domain.Article.Article", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long>("ArticleCategoryId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ShortDescription")
+                        .IsRequired()
+                        .HasMaxLength(1500)
+                        .HasColumnType("nvarchar(1500)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArticleCategoryId");
+
+                    b.ToTable("Articles");
+                });
+
             modelBuilder.Entity("AB.Domain.ArticleCategory.ArticleCategory", b =>
                 {
                     b.Property<long>("Id")
@@ -40,6 +80,22 @@ namespace AB.Infrastructure.EfCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ArticleCategories");
+                });
+
+            modelBuilder.Entity("AB.Domain.Article.Article", b =>
+                {
+                    b.HasOne("AB.Domain.ArticleCategory.ArticleCategory", "ArticleCategory")
+                        .WithMany("Articles")
+                        .HasForeignKey("ArticleCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ArticleCategory");
+                });
+
+            modelBuilder.Entity("AB.Domain.ArticleCategory.ArticleCategory", b =>
+                {
+                    b.Navigation("Articles");
                 });
 #pragma warning restore 612, 618
         }
