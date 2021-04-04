@@ -15,6 +15,11 @@ namespace AB.Domain.ArticleCategory
         public DateTime CreationDate { get; private set; }
         public ICollection<Article.Article> Articles { get; private set; }
 
+        public ArticleCategory()
+        {
+
+        }
+
         public ArticleCategory(string title, IArticleCategoryValidatorService service)
         {
             service.AlreadyExistsRecord(title);
