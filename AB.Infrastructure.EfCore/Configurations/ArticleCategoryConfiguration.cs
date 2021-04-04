@@ -21,6 +21,10 @@ namespace AB.Infrastructure.EfCore.Configurations
                 .IsRequired();
 
             builder.Property(prop => prop.IsDeleted);
+
+            builder.HasMany(rel => rel.Articles)
+                .WithOne(relMirror => relMirror.ArticleCategory)
+                .HasForeignKey(foreignKey => foreignKey.ArticleCategoryId);
         }
     }
 }
