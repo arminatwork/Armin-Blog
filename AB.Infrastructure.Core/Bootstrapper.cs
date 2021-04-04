@@ -1,6 +1,7 @@
 ﻿using AB.Application;
 using AB.Application.Contracts.ArticleCategory;
 using AB.Domain.ArticleCategory;
+using AB.Domain.ArticleCategory.Services;
 using AB.Infrastructure.EfCore;
 using AB.Infrastructure.EfCore.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,7 @@ namespace AB.Infrastructure.Core
         {
             services.AddTransient<IArticleCategoryApplication, ArticleCategoryApplication>();
             services.AddTransient<IArticleCategoryRepository, ArticleCategoryRepository>();
+            services.AddTransient<IArticleCategoryValidatorService, ArticleCategoryValidatorService>();
             services.AddDbContext<ArminBlogContext>(options =>
             {
                 options.UseSqlServer(connectionString);
