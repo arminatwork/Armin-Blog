@@ -15,11 +15,6 @@ namespace AB.Domain.Article
         public long ArticleCategoryId { get; private set; }
         public ArticleCategory.ArticleCategory ArticleCategory { get; private set; }
 
-        public Article()
-        {
-
-        }
-
         public Article(string title, string shortDescription, string image, string content, long articleCategoryId)
         {
             Title = title;
