@@ -1,4 +1,6 @@
 using System;
+using AB.Domain.ArticleCategory.Services;
+
 namespace AB.Domain.ArticleCategory
 {
     public class ArticleCategory
@@ -11,8 +13,9 @@ namespace AB.Domain.ArticleCategory
 
         public DateTime CreationDate { get; private set; }
 
-        public ArticleCategory(string title)
+        public ArticleCategory(string title, IArticleCategoryValidatorService service)
         {
+            service.AlreadyExistsRecord(title);
             Title = title;
             IsDeleted = false;
             CreationDate = DateTime.Now;
