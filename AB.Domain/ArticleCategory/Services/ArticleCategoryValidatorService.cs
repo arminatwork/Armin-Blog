@@ -1,8 +1,8 @@
-﻿using System;
+﻿using AB.Domain.ArticleCategory.Exceptions;
 
 namespace AB.Domain.ArticleCategory.Services
 {
-    class ArticleCategoryValidatorService : IArticleCategoryValidatorService
+    public class ArticleCategoryValidatorService : IArticleCategoryValidatorService
     {
         private readonly IArticleCategoryRepository _repository;
 
@@ -14,7 +14,7 @@ namespace AB.Domain.ArticleCategory.Services
         {
             if (_repository.Exists(title))
             {
-                throw new Exception();
+                throw new DuplicateRecordException($"{title} is already exists in database");
             }
         }
     }
